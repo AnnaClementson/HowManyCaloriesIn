@@ -1,19 +1,16 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using HowManyCaloriesIn.Models;
 
 namespace HowManyCaloriesIn.Data
 {
-    public class ItemInformationContext : IdentityDbContext
+	public class ApplicationDbContext : IdentityDbContext
     {
-        public ItemInformationContext(DbContextOptions<ItemInformationContext> options)
-            : base(options)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
-        public DbSet<HowManyCaloriesIn.Models.Item> Item { get; set; }
-        
+
+        public DbSet<Item> Item { get; set; }
+        public DbSet<Nutrients> Nutrients { get; set; }
     }
 }
