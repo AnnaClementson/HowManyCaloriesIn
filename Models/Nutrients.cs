@@ -10,13 +10,14 @@ namespace HowManyCaloriesIn.Models
     public class Nutrients
     {
         public int ID { get; set; }
-        public int Item_ID { get; set; }
         public int Calories { get; set; }
-
         public int Fat { get; set; }
-
         public int SaturatedFat { get; set; }
         public int Sugars { get; set; }
         public int Salt { get; set; }
+
+        [ForeignKey("Item")]
+        public int ItemID { get; set; }
+        public virtual Item Item { get; set; }
     }
 }

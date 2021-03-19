@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HowManyCaloriesIn.Data.Migrations
 {
-    [DbContext(typeof(ItemInformationContext))]
+    [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
@@ -18,26 +18,6 @@ namespace HowManyCaloriesIn.Data.Migrations
                 .HasAnnotation("ProductVersion", "3.1.13")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("HowManyCaloriesIn.Models.Calories", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CalorieAmount")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ItemIDID")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("ItemIDID");
-
-                    b.ToTable("Calories");
-                });
 
             modelBuilder.Entity("HowManyCaloriesIn.Models.Item", b =>
                 {
@@ -54,7 +34,40 @@ namespace HowManyCaloriesIn.Data.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Item");
+                    b.ToTable("tblItem");
+                });
+
+            modelBuilder.Entity("HowManyCaloriesIn.Models.Nutrients", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Calories")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Fat")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ItemID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Salt")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SaturatedFat")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Sugars")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ItemID")
+                        .IsUnique();
+
+                    b.ToTable("tblNutrients");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -200,12 +213,10 @@ namespace HowManyCaloriesIn.Data.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -242,12 +253,10 @@ namespace HowManyCaloriesIn.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -257,11 +266,13 @@ namespace HowManyCaloriesIn.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("HowManyCaloriesIn.Models.Calories", b =>
+            modelBuilder.Entity("HowManyCaloriesIn.Models.Nutrients", b =>
                 {
-                    b.HasOne("HowManyCaloriesIn.Models.Item", "ItemID")
-                        .WithMany()
-                        .HasForeignKey("ItemIDID");
+                    b.HasOne("HowManyCaloriesIn.Models.Item", "Item")
+                        .WithOne("Nutrients")
+                        .HasForeignKey("HowManyCaloriesIn.Models.Nutrients", "ItemID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

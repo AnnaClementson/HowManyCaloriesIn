@@ -13,9 +13,9 @@ namespace HowManyCaloriesIn.Controllers
 {
     public class ItemsController : Controller
     {
-        private readonly Data.ItemInformationContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public ItemsController(Data.ItemInformationContext context)
+        public ItemsController(ApplicationDbContext context)
         {
             _context = context;
         }
