@@ -1,19 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HowManyCaloriesIn.Models;
+using HowManyCaloriesIn.Data;
 
 namespace HowManyCaloriesIn.Controllers
 {
     public class ItemController : Controller
     {
-        public async Task<IActionResult> Index()
+        private readonly ApplicationDbContext _context;
+
+        public ItemController(ApplicationDbContext context)
         {
-            ItemInformationContext iic = new ItemInformationContext();
-            List<Item> myItems = iic.Items.ToList();
-            return View(myItems);
+            _context = context;
+        }
+
+        public IActionResult Index()
+        {
+            var items = _context.Item.AsEnumerable();
+
+            return View(items);
         }
     }
 }
