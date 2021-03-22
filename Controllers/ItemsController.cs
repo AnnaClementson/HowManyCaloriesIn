@@ -101,7 +101,7 @@ namespace HowManyCaloriesIn.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,ItemName,ItemSize")] Item item)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,ItemName,ItemSize,Nutrients.Calories")] Item item)
         {
             if (id != item.ID)
             {
