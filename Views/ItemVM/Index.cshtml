@@ -1,0 +1,20 @@
+﻿@model HowManyCaloriesIn.Models.ItemViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Item Information</h1>
+
+
+
+@foreach (var item in model)
+{
+
+    <h3>  @Html.DisplayFor(m => m.Calories)</h3>
+    <h2>  @Html.DisplayNameFor(m => m.Calories)</h2>
+}
+
+
+
+

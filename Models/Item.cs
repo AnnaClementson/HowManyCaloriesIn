@@ -1,11 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HowManyCaloriesIn.Models
 {
-	[Table("tblItem")]
-    public class Item
+	[Table("Item")]
+    public partial class Item
     {
-        public int ID { get; set; }
+        [Key]
+        public int Id { get; set; }
         public string ItemName { get; set; }
         public string ItemSize { get; set; }
 

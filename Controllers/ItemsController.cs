@@ -47,7 +47,7 @@ namespace HowManyCaloriesIn.Controllers
             }
 
             var item = await _context.Item
-                .FirstOrDefaultAsync(m => m.ID == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (item == null)
             {
                 return NotFound();
@@ -103,7 +103,7 @@ namespace HowManyCaloriesIn.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ID,ItemName,ItemSize,Nutrients.Calories")] Item item)
         {
-            if (id != item.ID)
+            if (id != item.Id)
             {
                 return NotFound();
             }
@@ -117,7 +117,7 @@ namespace HowManyCaloriesIn.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ItemExists(item.ID))
+                    if (!ItemExists(item.Id))
                     {
                         return NotFound();
                     }
@@ -141,7 +141,7 @@ namespace HowManyCaloriesIn.Controllers
             }
 
             var item = await _context.Item
-                .FirstOrDefaultAsync(m => m.ID == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (item == null)
             {
                 return NotFound();
@@ -164,7 +164,7 @@ namespace HowManyCaloriesIn.Controllers
 
         private bool ItemExists(int id)
         {
-            return _context.Item.Any(e => e.ID == id);
+            return _context.Item.Any(e => e.Id == id);
         }
     }
 }
