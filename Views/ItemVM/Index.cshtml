@@ -1,5 +1,4 @@
-﻿@model HowManyCaloriesIn.Models.ItemViewModel
-
+﻿@model IEnumerable<HowManyCaloriesIn.Models.ItemViewModel>
 @{
     ViewData["Title"] = "Index";
 }
@@ -7,14 +6,38 @@
 <h1>Item Information</h1>
 
 
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ItemName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ItemSize)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+        </tr>
+    </thead>
 
-@foreach (var item in model)
-{
-
-    <h3>  @Html.DisplayFor(m => m.Calories)</h3>
-    <h2>  @Html.DisplayNameFor(m => m.Calories)</h2>
-}
-
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ItemName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ItemSize)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
 
 
 
